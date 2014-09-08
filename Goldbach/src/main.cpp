@@ -12,9 +12,10 @@ bool isPrime(int);
 
 int main() {
 	int primesList[3432];
-	int t = 0;
-	int** addLo;
-	int** addHi;
+	int t,n,x = 0;
+	int bound = 0;
+	int addendLo;
+	int addendHi;
 	ifstream infile;
 	ofstream outfile;
 	infile.open("goldbach.in");
@@ -38,17 +39,44 @@ int main() {
 			t++;
 		}
 	}
+	/*
 	for (int i = 0; i < 10; i++){
 		cout << primesList[i] << endl;
 	}
 	cout << primesList[3431] << endl;
 	//*/
-	//cout << t << endl;
-	//cout << isPrime(5) << endl;
 
 	//cin >> n;		//Assumes 1 <= n <= 100
-	
-	
+	infile >> n;
+		
+	for(int i = 0, u = 0; i < n; i++){
+		bool* map;
+		infile >> x;	//read the number to factor
+		bound = ((int)sqrt(x))+1;	//after this number we've checked all possible combos
+		map = new bool[bound];
+		for(int j = 0; primesList[j] < bound; j++){
+			addendLo = primesList[j];
+			addendHi = (x-addendLo);
+			map[j] = isPrime(addendHi);
+			if(map[j]) u++;
+		}
+		cout << x << " has " << u << " representation(s)" << endl;
+		outfile << x << " has " << u << " representation(s)" << endl;
+		for(int j = 0, k = 0; j < bound; k++){
+			if(map[k] == false) continue;
+			else{
+				j++;
+				addendLo = primesList[k];
+				addendHi = (x-addendLo);
+				cout << addendLo << "+" << addendHi << endl;
+				outfile << addendLo << "+" << addendHi << endl;
+			}
+		}
+		cout << endl << endl;
+
+		delete[] map;
+		map = NULL;
+	}
 	return 0;
 }
 
