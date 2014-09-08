@@ -8,6 +8,13 @@
 using namespace std;
 
 bool isPrime(int);
+
+void testPrimality(int upper){
+	for(int i = 1; i <= upper; i++){
+		cout << i << ' ' << isPrime(i) << endl;
+		if(!(i%10)) system("pause");
+	}
+};
 //int arraySize(int&);
 
 int main() {
@@ -39,20 +46,16 @@ int main() {
 			t++;
 		}
 	}
-	/*
-	for (int i = 0; i < 10; i++){
-		cout << primesList[i] << endl;
-	}
-	cout << primesList[3431] << endl;
-	//*/
+	
+//	testPrimality(100);
 
-	//cin >> n;		//Assumes 1 <= n <= 100
 	infile >> n;
-		
+	
+//	/*
 	for(int i = 0, u = 0; i < n; i++){
 		bool* map;
 		infile >> x;	//read the number to factor
-		bound = ((int)sqrt(x))+1;	//after this number we've checked all possible combos
+		bound = (x/2);	//after this number we've checked all possible combos
 		map = new bool[bound];
 		for(int j = 0; primesList[j] < bound; j++){
 			addendLo = primesList[j];
@@ -77,6 +80,7 @@ int main() {
 		delete[] map;
 		map = NULL;
 	}
+//	*/
 	return 0;
 }
 
