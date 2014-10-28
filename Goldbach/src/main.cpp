@@ -50,14 +50,14 @@ int main() {
 //	testPrimality(100);
 
 	infile >> n;
-	
+	bool* map;
 //	/*
-	for(int i = 0, u = 0; i < n; i++){
-		bool* map;
+	for(int i = 0; i < n; i++){
+		int u = 0;
 		infile >> x;	//read the number to factor
 		bound = (x/2);	//after this number we've checked all possible combos
 		map = new bool[bound];
-		for(int j = 0; primesList[j] < bound; j++){
+		for(int j = 0; primesList[j] <= bound; j++){
 			addendLo = primesList[j];
 			addendHi = (x-addendLo);
 			map[j] = isPrime(addendHi);
@@ -65,7 +65,7 @@ int main() {
 		}
 		cout << x << " has " << u << " representation(s)" << endl;
 		outfile << x << " has " << u << " representation(s)" << endl;
-		for(int j = 0, k = 0; j < bound; k++){
+		for(int j = 0, k = 0; j < u; k++){
 			if(map[k] == false) continue;
 			else{
 				j++;
@@ -76,9 +76,7 @@ int main() {
 			}
 		}
 		cout << endl << endl;
-
-		delete[] map;
-		map = NULL;
+		delete map;
 	}
 //	*/
 	return 0;
